@@ -16,13 +16,6 @@ SignUp_recruit::~SignUp_recruit()
 
 void SignUp_recruit::on_pushButton_finish_clicked()
 {
-    // setting up database connection
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
-    db.setUserName("root");
-    db.setPassword("Gigster1409");
-    db.setDatabaseName("employment_agency_v1.0");
-
     // getting the data
     QString company = ui->lineEdit_company->text();
     QString name  = ui->lineEdit_name->text();
@@ -30,20 +23,25 @@ void SignUp_recruit::on_pushButton_finish_clicked()
     QString url  = ui->lineEdit_url->text();
     QString details = ui->textEdit_details->toPlainText();
 
-    if (db.open()) {
-        // setting up INSERT query
-        QSqlQuery query;
-        query.prepare("INSERT INTO seekers(recruiter_id, name, job_title, from_company, company_description, company_image, company_url)"
-                                "VALUES(:recruiter_id, :name, :job_title, :from_company, :company_description, :company_image, :company_url)");
+    // setting up INSERT query
+    QSqlQuery query;
+    query.prepare(QString("INSERT INTO recruiter(recruiter_id, name, job_title, from_company, company_description, company_image, company_url)")
+                          +  QString("VALUES(:recruiter_id, :name, :job_title, :from_company, :company_description, :company_image, :company_url)"));
 
-        query.bindValue(":seeker_id", ((SignUp*)parentWidget())->getCount());
-        query.bindValue(":name", name);
-        query.bindValue(":job_title", title);
-        query.bindValue(":from_company", company);
-        query.bindValue(":company_description", details);
-        query.bindValue(":company_image", NULL);
-        query.bindValue(":company_url", url);
+    query.bindValue(":recruiter_id", ((SignUp*)parentWidget())->getCount());
+    query.bindValue(":name", name);
+    query.bindValue(":job_title", title);
+    query.bindValue(":from_company", company);
+    query.bindValue(":company_description", details);
+    query.bindValue(":company_image", NULL);
+    query.bindValue(":company_url", url);
 
-        query.exec();
-    }
+    if (query.exec()) {
+        // successfull query will insert the new entry
+
+        hide();
+        parentWidget()->parentWidget()->show();
+    } else
+        qDebug() << "signup_recruit.cpp query unsuccessful";
+
 }

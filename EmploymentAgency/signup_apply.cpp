@@ -16,28 +16,26 @@ SignUp_apply::~SignUp_apply()
 
 void SignUp_apply::on_pushButton_finish_clicked()
 {
-    // setting up database connection
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
-    db.setUserName("root");
-    db.setPassword("Gigster1409");
-    db.setDatabaseName("employment_agency_v1.0");
-
     // getting the data
     QString name = ui->lineEdit_name->text();
     QString details = ui->textEdit_description->toPlainText();
 
-    if (db.open()) {
-        // setting up INSERT query
-        QSqlQuery query;
-        query.prepare("INSERT INTO seekers(seeker_id, name, CV, other_details)"
-                                "VALUES(:seeker_id, :name, :CV, :other_details)");
+    // setting up INSERT query
+    QSqlQuery query;
+    query.prepare(QString("INSERT INTO seeker(seeker_id, name, CV, other_details)")
+                          + QString("VALUES(:seeker_id, :name, :CV, :other_details)"));
 
-        query.bindValue(":seeker_id", ((SignUp*)parentWidget())->getCount());
-        query.bindValue(":name", name);
-        query.bindValue(":CV", NULL);
-        query.bindValue(":other_details", details);
+    query.bindValue(":seeker_id", ((SignUp*) parentWidget())->getCount());
+    query.bindValue(":name", name);
+    query.bindValue(":CV", NULL);
+    query.bindValue(":other_details", details);
 
-        query.exec();
-    }
+    if (query.exec()) {
+        // successfull query will insert the new entry
+
+        hide();
+        parentWidget()->parentWidget()->show();
+    } else
+        qDebug() << "signup_apply.cpp query unsuccessful";
+
 }
