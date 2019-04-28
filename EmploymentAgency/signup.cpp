@@ -7,8 +7,8 @@ SignUp::SignUp(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // create a counter for ids
-    counter = 0;
+    // initialize a counter for ids
+    counterInit();
 }
 
 SignUp::~SignUp()
@@ -37,9 +37,25 @@ bool SignUp::emailExisted(QString &email) {
     return false;
 }
 
+
+
 int SignUp::getCount()
 {
     return counter;
+}
+
+void SignUp::counterInit() {
+    QSqlQuery query;
+    query.prepare("SELECT MAX(A.id) FROM login_account A");
+
+    if (query.exec()) {
+        if (query.next())
+            counter = query.value(0).toInt();
+        else
+            counter = 0;
+    } else {
+        qDebug() << "Counter init failed";
+    }
 }
 
 // when 'Submit' button is clicked

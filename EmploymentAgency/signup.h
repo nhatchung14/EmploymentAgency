@@ -22,6 +22,7 @@ class SignUp : public QDialog
 public:
     explicit SignUp(QWidget *parent = nullptr);
     bool emailExisted(QString &email);
+    void counterInit();
     int getCount();          // this function returns the number of insertions
 
     ~SignUp();
