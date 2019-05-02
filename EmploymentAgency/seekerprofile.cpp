@@ -15,9 +15,6 @@ seekerprofile::~seekerprofile()
     delete ui;
 }
 
-
-
-
 void seekerprofile::on_pushButton_clicked()
 {
 

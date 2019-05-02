@@ -1,12 +1,16 @@
+debug/add_vacancy.o
 debug/main.o
 debug/mainwindow.o
+debug/recruiterprofile.o
 debug/signup.o
 debug/signup_recruit.o
 debug/signup_apply.o
 debug/seekerprofile.o
 debug/add_education.o
 debug/add_experience.o
+debug/moc_add_vacancy.o
 debug/moc_mainwindow.o
+debug/moc_recruiterprofile.o
 debug/moc_signup.o
 debug/moc_signup_recruit.o
 debug/moc_signup_apply.o
