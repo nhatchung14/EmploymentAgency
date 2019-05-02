@@ -1,0 +1,15 @@
+release/main.o
+release/mainwindow.o
+release/signup.o
+release/signup_recruit.o
+release/signup_apply.o
+release/seekerprofile.o
+release/add_education.o
+release/add_experience.o
+release/moc_mainwindow.o
+release/moc_signup.o
+release/moc_signup_recruit.o
+release/moc_signup_apply.o
+release/moc_seekerprofile.o
+release/moc_add_education.o
+release/moc_add_experience.o

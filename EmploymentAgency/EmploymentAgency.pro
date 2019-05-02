@@ -29,19 +29,28 @@ SOURCES += \
         mainwindow.cpp \
     signup.cpp \
     signup_recruit.cpp \
-    signup_apply.cpp
+    signup_apply.cpp \
+    seekerprofile.cpp \
+    add_education.cpp \
+    add_experience.cpp
 
 HEADERS += \
         mainwindow.h \
     signup.h \
     signup_recruit.h \
-    signup_apply.h
+    signup_apply.h \
+    seekerprofile.h \
+    add_education.h \
+    add_experience.h
 
 FORMS += \
         mainwindow.ui \
     signup.ui \
     signup_recruit.ui \
-    signup_apply.ui
+    signup_apply.ui \
+    seekerprofile.ui \
+    add_education.ui \
+    add_experience.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

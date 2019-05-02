@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // connect the database
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("D:/SQL-lite/EmploymentAgency");
+    db.setDatabaseName("C:/Users/Admin/Documents/GitHub/EmploymentAgency/Database/EmploymentAgency");
     if (db.open()) {}
     else {
         QMessageBox::information(this, "Login call", "Database failed");
@@ -30,7 +30,7 @@ void MainWindow::on_logInButton_clicked()
 
     // Query for entered user from the database
     QSqlQuery query;
-    query.prepare("SELECT A.email, A.password FROM login_account A WHERE A.email = :email");
+    query.prepare("SELECT A.email, A.password FROM login_account A WHERE A.email = :email AND user_type='Applicant'");
     query.bindValue(":email", email);
 
     if (query.exec()) {
@@ -38,7 +38,11 @@ void MainWindow::on_logInButton_clicked()
         if (query.next()) {
             if (password == query.value(1).toString()) {
                 // Log in successful
-                QMessageBox::information(this, "Login call", "Login successful");
+                hide();
+                seekprof = new seekerprofile(this);
+                seekprof->setEmail(email);
+                seekprof->setModal(true);
+                seekprof->exec();
 
             } else {
                 // Log in unsuccessful

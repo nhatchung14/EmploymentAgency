@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <signup.h>
+#include"seekerprofile.h"
 
 namespace Ui {
 class MainWindow;
@@ -13,8 +14,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QSqlDatabase db;
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void setName(QString);
+    QString getName();
 
 private slots:
 
@@ -25,7 +29,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SignUp *signUp;
-    QSqlDatabase db;
+    seekerprofile *seekprof;
 };
 
 #endif // MAINWINDOW_H
