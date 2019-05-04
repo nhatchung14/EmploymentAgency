@@ -25,8 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    add_vacancy.cpp \
         main.cpp \
         mainwindow.cpp \
+    recruiterprofile.cpp \
     signup.cpp \
     signup_recruit.cpp \
     signup_apply.cpp \
@@ -35,7 +37,9 @@ SOURCES += \
     add_experience.cpp
 
 HEADERS += \
+    add_vacancy.h \
         mainwindow.h \
+    recruiterprofile.h \
     signup.h \
     signup_recruit.h \
     signup_apply.h \
@@ -44,7 +48,9 @@ HEADERS += \
     add_experience.h
 
 FORMS += \
+    add_vacancy.ui \
         mainwindow.ui \
+    recruiterprofile.ui \
     signup.ui \
     signup_recruit.ui \
     signup_apply.ui \

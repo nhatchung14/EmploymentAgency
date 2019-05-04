@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <signup.h>
 #include"seekerprofile.h"
+#include"recruiterprofile.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,9 @@ private:
     Ui::MainWindow *ui;
     SignUp *signUp;
     seekerprofile *seekprof;
+
+    void GetSeekerProfile(QString);
+    void GetRecruiterProfile(QString);
 };
 
 #endif // MAINWINDOW_H

@@ -1,5 +1,6 @@
 #include "add_experience.h"
 #include "ui_add_experience.h"
+#include "mainwindow.h"
 
 add_experience::add_experience(QWidget *parent) :
     QDialog(parent),
