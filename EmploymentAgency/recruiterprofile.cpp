@@ -207,6 +207,9 @@ void recruiterprofile::on_pushButton_editMode_clicked()
         query.bindValue(":company_description", ui->plainTextEdit_description->toPlainText());
         query.bindValue(":url", ui->lineEdit_url->text());
         query.bindValue(":id", this->id);
+        if (query.exec()) {
+            qDebug() << "query 2 executed";
+        }
 
         ui->pushButton_editMode->setText("Read");
     } else {

@@ -209,6 +209,7 @@ void seekerprofile::on_pushButton_editMode_clicked()
         query.bindValue(":name", ui->lineEdit_name->text());
         query.bindValue(":description", ui->plainTextEdit_description->toPlainText());
         query.bindValue(":id", this->id);
+        query.exec();
 
         ui->pushButton_editMode->setText("Read");
     } else {
