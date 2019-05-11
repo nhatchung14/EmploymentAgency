@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // connect the database
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("D:/#Workspace [C++]/EmploymentAgency/Database/EmploymentAgency");
+    db.setDatabaseName("C:/Users/wokhu/Documents/DB Assignment/EmploymentAgency-master/EmploymentAgency-master/Database/EmploymentAgency");
     if (db.open()) {}
     else {
         QMessageBox::information(this, "Login call", "Database failed");
