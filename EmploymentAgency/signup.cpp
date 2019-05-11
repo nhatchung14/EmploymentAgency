@@ -95,7 +95,7 @@ void SignUp::on_pushButton_submit_clicked()
 
     if (query.exec()) {
         hide();
-        if (user_type == "Applicant") {
+        if (user_type == "Seeker") {
             ui_app = new SignUp_apply(this);
             ui_app->show();
         } else if (user_type == "Recruiter") {

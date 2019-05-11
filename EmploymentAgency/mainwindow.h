@@ -5,6 +5,7 @@
 #include <signup.h>
 #include"seekerprofile.h"
 #include"recruiterprofile.h"
+#include"staff.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,11 +30,11 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    SignUp *signUp;
     seekerprofile *seekprof;
 
-    void GetSeekerProfile(QString);
-    void GetRecruiterProfile(QString);
+    void getSeekerProfile(int db_id);
+    void getRecruiterProfile(int db_id);
+    void getStaffProfile(int db_id);
 };
 
 #endif // MAINWINDOW_H

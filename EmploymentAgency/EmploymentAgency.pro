@@ -25,38 +25,47 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    add_vacancy.cpp \
+    vacancy.cpp \
         main.cpp \
         mainwindow.cpp \
-    recruiterprofile.cpp \
     signup.cpp \
     signup_recruit.cpp \
     signup_apply.cpp \
     seekerprofile.cpp \
-    add_education.cpp \
-    add_experience.cpp
+    recruiterprofile.cpp \
+    search.cpp \
+    education.cpp \
+    experience.cpp \
+    staff.cpp \
+    vacancylocation.cpp
 
 HEADERS += \
-    add_vacancy.h \
+    vacancy.h \
         mainwindow.h \
-    recruiterprofile.h \
     signup.h \
     signup_recruit.h \
     signup_apply.h \
     seekerprofile.h \
-    add_education.h \
-    add_experience.h
+    recruiterprofile.h \
+    search.h \
+    education.h \
+    experience.h \
+    staff.h \
+    vacancylocation.h
 
 FORMS += \
-    add_vacancy.ui \
+    vacancy.ui \
         mainwindow.ui \
-    recruiterprofile.ui \
     signup.ui \
     signup_recruit.ui \
     signup_apply.ui \
     seekerprofile.ui \
-    add_education.ui \
-    add_experience.ui
+    recruiterprofile.ui \
+    search.ui \
+    education.ui \
+    experience.ui \
+    staff.ui \
+    vacancylocation.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

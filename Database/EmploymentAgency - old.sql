@@ -76,6 +76,35 @@ CREATE TABLE IF NOT EXISTS experience_info (
 
 
 -- -----------------------------------------------------
+-- Table ref_skills
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS ref_skills (
+  skill_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  skill_description VARCHAR(50) NOT NULL
+);
+
+
+-- -----------------------------------------------------
+-- Table seeker_skills
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS seeker_skills (
+  seeker_id INTEGER NOT NULL,
+  skill_id INTEGER NOT NULL,
+  PRIMARY KEY (seeker_id, skill_id),
+  CONSTRAINT fk_seeker_skills_seeker_prof1
+    FOREIGN KEY (seeker_id)
+    REFERENCES seeker (seeker_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT FK_refSkills_seekerSkills
+    FOREIGN KEY (skill_id)
+    REFERENCES ref_skills (skill_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+
+-- -----------------------------------------------------
 -- Table recruiter
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS recruiter (
@@ -116,6 +145,26 @@ CREATE TABLE IF NOT EXISTS vacancy (
   CONSTRAINT fk_vacancy_info_recruiter
     FOREIGN KEY (recruiter_id)
     REFERENCES recruiter (recruiter_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+
+-- -----------------------------------------------------
+-- Table vacancy_required_skills
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS vacancy_required_skills (
+  vacancy_id INTEGER NOT NULL,
+  skill_id INTEGER NOT NULL,
+  PRIMARY KEY (vacancy_id, skill_id),
+  CONSTRAINT fk_vacancy_required_skills_vacancy_info1
+    FOREIGN KEY (vacancy_id)
+    REFERENCES vacancy (vacancy_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT FK_refSkills_vacancySkills
+    FOREIGN KEY (skill_id)
+    REFERENCES ref_skills (skill_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
