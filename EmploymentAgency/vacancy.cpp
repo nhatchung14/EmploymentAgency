@@ -1,5 +1,6 @@
 #include "vacancy.h"
 #include "ui_vacancy.h"
+#include "recruiterprofile.h"
 #include "vacancylocation.h"
 
 vacancy::vacancy(QWidget *parent) :
@@ -11,6 +12,7 @@ vacancy::vacancy(QWidget *parent) :
     // data view model
     location_model = new QSqlQueryModel;
     ui->tableView_locations->setSelectionBehavior(QAbstractItemView::SelectRows); // select items as rows
+
     //CounterInit();
 }
 
@@ -19,15 +21,23 @@ vacancy::~vacancy()
     delete ui;
 }
 
-void vacancy::setSession(int ID) {
+void vacancy::setSession(int ID, int Type) {
     this->sessionID = ID;
+    this->sessionType = Type;
+
+    if (this->sessionType == 1) // the session belongs to a seeker
+    {
+        closeLocationButtons();
+        ui->pushButton_add_vacancy->close();
+    } else {
+        ui->pushButton_apply->close();
+    }
 }
 
 void vacancy::setRecruiterID(int ID)
 {
     this->idRecruiter = ID;
-    closeButton_1();
-    closeButtons_2();
+    closeLocationButtons();
 }
 
 void vacancy::setReadOnly() {
@@ -47,6 +57,7 @@ void vacancy::setReadOnly() {
 
 void vacancy::setID(int ID) {
     ui->pushButton_add_vacancy->close();
+
     this->id = ID;
 
     // get the data from database
@@ -72,10 +83,9 @@ void vacancy::setID(int ID) {
     loadLocations();
 }
 
-void vacancy::setPerspective(int perspective) {
-    this->perspective = perspective;
-    if (perspective != 1)
-        closeButton_1();
+void vacancy::closeLocationButtons() {
+    ui->pushButton_add_location->close();
+    ui->pushButton_del_location->close();
 }
 
 void vacancy::on_pushButton_apply_clicked()
@@ -87,16 +97,6 @@ void vacancy::on_pushButton_apply_clicked()
     query.bindValue(":vacancy_id", this->id);
     if (!query.exec())
         qDebug() << "Job application failed.";
-}
-
-void vacancy::closeButton_1() {
-    ui->pushButton_apply->close();
-}
-
-
-void vacancy::closeButtons_2() {
-    ui->pushButton_add_location->close();
-    ui->pushButton_del_location->close();
 }
 
 void vacancy::on_pushButton_add_vacancy_clicked()
@@ -143,7 +143,10 @@ void vacancy::on_pushButton_add_vacancy_clicked()
     if (query.exec()) {
         // successfull query will insert the new entry
         hide();
+        ((recruiterprofile*) parentWidget())->loadVacancies();
         parentWidget()->show();
+
+        delete ui;
     } else
         qDebug() << "add vacancy query unsuccessful";
 }
@@ -152,6 +155,7 @@ void vacancy::on_pushButton_back_clicked()
 {
     hide();
     parentWidget()->show();
+
     delete ui;
 }
 
@@ -202,7 +206,9 @@ void vacancy::on_pushButton_del_location_clicked()
         qry.bindValue(":ward", location_model->index(rowidx, 1).data().toString());
         qry.bindValue(":district", location_model->index(rowidx, 2).data().toString());
         qry.bindValue(":city", location_model->index(rowidx, 3).data().toString());
-        qry.exec();
+
+        if (qry.exec())
+            loadLocations();
     }
 }
 
@@ -211,4 +217,9 @@ void vacancy::on_pushButton_add_location_clicked()
     VacancyLocation *newLocation = new VacancyLocation(this, this->id);
     newLocation->setModal(true);
     newLocation->exec();
+}
+
+void vacancy::on_pushButton_reload_clicked()
+{
+    loadLocations();
 }

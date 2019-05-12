@@ -1,6 +1,6 @@
 #include "experience.h"
 #include "ui_experience.h"
-#include "mainwindow.h"
+#include "seekerprofile.h"
 
 experience::experience(QWidget *parent) :
     QDialog(parent),
@@ -39,7 +39,10 @@ void experience::on_pushButton_clicked()
     if (query.exec()) {
         // successfull query will insert the new entry
         hide();
+        ((seekerprofile*) parentWidget())->loadExperience();
         parentWidget()->show();
+
+        delete ui;
     } else
         qDebug() << "signup_apply.cpp query unsuccessful";
 }

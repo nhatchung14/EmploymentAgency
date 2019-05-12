@@ -18,12 +18,10 @@ public:
     ~vacancy();
     void setRecruiterID(int);
     void setID(int);
-    void setPerspective(int);
     void setReadOnly();
-    void setSession(int ID);
+    void setSession(int ID, int Type);
     void loadLocations();
-    void closeButton_1();
-    void closeButtons_2();
+    void closeLocationButtons();
 
 private slots:
     void on_pushButton_add_vacancy_clicked();
@@ -39,6 +37,8 @@ private slots:
 
     void on_pushButton_add_location_clicked();
 
+    void on_pushButton_reload_clicked();
+
 private:
     Ui::vacancy *ui;
     QSqlQueryModel *location_model;
@@ -46,15 +46,14 @@ private:
     // counter for vacancy
     int counter;
 
-    // these two applies if the vacancy exists
+    // this applies if the vacancy exists
     int id;              // id of the vacancy
-    int perspective = 0; // 0 is standard, 1 is the seeker view
 
-    // if the session belongs to the owner
+    // this applies if the vacancy is in adding mode
     int idRecruiter;
 
-    // `ID` of the session
-    int sessionID;
+    // the session info
+    int sessionID, sessionType;
 };
 
 #endif // VACANCY_H

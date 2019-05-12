@@ -25,7 +25,7 @@ public:
     void loadEducation();
     void loadExperience();
     int getID();
-    void setSession(int ID);
+    void setSession(int ID, int Type);
 
 private slots:
 
@@ -53,7 +53,7 @@ private:
 
     Search      *searcher;
 
-    int sessionID;
+    int sessionID, sessionType;
     int editMode; // 1 is read-only, 0 is read/write
     int id;
 };

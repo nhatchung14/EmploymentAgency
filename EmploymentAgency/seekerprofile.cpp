@@ -41,8 +41,9 @@ seekerprofile::~seekerprofile()
     delete ui;
 }
 
-void seekerprofile::setSession(int ID) {
+void seekerprofile::setSession(int ID, int Type) {
     this->sessionID = ID;
+    this->sessionType = Type;
 }
 
 void seekerprofile::loadProfile()
@@ -135,7 +136,9 @@ void seekerprofile::on_pushButton_delEduInfo_clicked()
         qry.bindValue(":sname", edu_model->index(rowidx , 0).data().toString());
         qry.bindValue(":major", edu_model->index(rowidx , 1).data().toString());
         qry.bindValue(":dname", edu_model->index(rowidx , 2).data().toString());
-        qry.exec();
+
+        if (qry.exec())
+            loadEducation();
     }
 }
 
@@ -156,9 +159,11 @@ void seekerprofile::on_pushButton_delExpInfo_clicked()
 
         qry.prepare("DELETE FROM experience_info WHERE seeker_id = :id AND company_name = :cname AND job_title = :title");
         qry.bindValue(":id", this->id);
-        qry.bindValue(":cname", edu_model->index(rowidx , 0).data().toString());
-        qry.bindValue(":title", edu_model->index(rowidx , 1).data().toString());
-        qry.exec();
+        qry.bindValue(":cname", exp_model->index(rowidx , 0).data().toString());
+        qry.bindValue(":title", exp_model->index(rowidx , 1).data().toString());
+
+        if (qry.exec())
+            loadExperience();
     }
 }
 
@@ -173,7 +178,7 @@ void seekerprofile::on_pushButton_search_clicked()
 {
     this->hide();
     searcher = new Search(this, 1);
-    searcher->setSession(this->sessionID);
+    searcher->setSession(this->sessionID, this->sessionType);
     searcher->show();
 }
 

@@ -25,7 +25,7 @@ MainWindow::~MainWindow()
 void MainWindow::getSeekerProfile(int db_id)
 {
     seekerprofile *seekprof = new seekerprofile(this, db_id);
-    seekprof->setSession(db_id);
+    seekprof->setSession(db_id, 1); // a seeker has session type 1
     seekprof->setModal(true);
     seekprof->exec();
 }
@@ -33,7 +33,7 @@ void MainWindow::getSeekerProfile(int db_id)
 void MainWindow::getRecruiterProfile(int db_id)
 {
     recruiterprofile *recruitprof = new recruiterprofile(this, db_id);
-    recruitprof->setSession(db_id);
+    recruitprof->setSession(db_id, 0); // a recruiter has session type 0
     recruitprof->setModal(true);
     recruitprof->exec();
 }

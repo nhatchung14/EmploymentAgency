@@ -1,6 +1,6 @@
 #include "education.h"
 #include "ui_education.h"
-#include "mainwindow.h"
+#include "seekerprofile.h"
 
 education::education(QWidget *parent) :
     QDialog(parent),
@@ -37,7 +37,9 @@ void education::on_pushButton_clicked()
     if (query.exec()) {
         // successfull query will insert the new entry
         hide();
+        ((seekerprofile*) parentWidget())->loadEducation();
         parentWidget()->show();
+        delete ui;
     } else
         qDebug() << "signup_apply.cpp query unsuccessful";
 }

@@ -23,7 +23,7 @@ public:
     void loadProfile();
     void loadVacancies();
     void loadJobApplications();
-    void setSession(int ID);
+    void setSession(int ID, int Type);
 
 private slots:
     void on_pushButton_reload_clicked();
@@ -51,7 +51,7 @@ private:
     int editMode; // 1 is read-only, 0 is read/write
     int perspective; // -1 is owner, 0 is standard_view, 1 is seeker_view
 
-    int sessionID;
+    int sessionID, sessionType;
     int id;
 };
 

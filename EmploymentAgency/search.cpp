@@ -30,8 +30,9 @@ Search::~Search()
     delete ui;
 }
 
-void Search::setSession(int ID) {
+void Search::setSession(int ID, int Type) {
     this->sessionID = ID;
+    this->sessionType = Type;
 }
 
 
@@ -108,26 +109,22 @@ void Search::on_tableView_doubleClicked(const QModelIndex &index)
             if (ui->comboBox_usertype->currentText() == "Seekers") {
                 // if the clicked row belongs to a seeker
                 seekerprofile *searched = new seekerprofile(this, id, 1);
-                searched->setSession(this->sessionID);
+                searched->setSession(this->sessionID, this->sessionType);
                 searched->setModal(true);
                 searched->exec();
             } else {
                 // if the clicked row belongs to a recruiter
                 recruiterprofile *searched = new recruiterprofile(this, id, 1);
-                searched->setSession(this->sessionID);
+                searched->setSession(this->sessionID, this->sessionType);
                 searched->setModal(true);
                 searched->exec();
             }
         } else {
             // if the clicked row belongs to a vacancy
             vacancy *cur = new vacancy(this);
-            cur->setSession(this->sessionID);
+            cur->setSession(this->sessionID, this->sessionType);
             cur->setID(id);
-            if (this->perspective == 1) {
-                cur->setPerspective(1); // seeker view
-            } else {
-                cur->setPerspective(0); // standard
-            }
+            cur->closeLocationButtons(); // no need for these buttons now
 
             cur->setModal(true);
             cur->exec();

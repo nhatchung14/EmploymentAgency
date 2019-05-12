@@ -1,5 +1,6 @@
 #include "vacancylocation.h"
 #include "ui_vacancylocation.h"
+#include "vacancy.h"
 #include <QSqlQuery>
 
 VacancyLocation::VacancyLocation(QWidget *parent, int vacancy_id) :
@@ -32,6 +33,7 @@ void VacancyLocation::on_pushButton_clicked()
         query.bindValue(":city", city);
         if (query.exec()) {
             hide();
+            ((vacancy*) parentWidget())->loadLocations();
             parentWidget()->show();
             delete ui;
         }

@@ -18,7 +18,7 @@ public:
     explicit Search(QWidget *parent = nullptr, int perspective = 0);
     ~Search();
     QString prepareCommand();
-    void setSession(int ID);
+    void setSession(int ID, int Type);
 
 private slots:
     void on_pushButton_load_clicked();
@@ -33,7 +33,7 @@ private:
     Ui::Search *ui;
     QSqlQueryModel *model;
 
-    int sessionID;
+    int sessionID, sessionType;
 
     int state; // 0 is `Profiles`,
                // 1 is `Vacancies`

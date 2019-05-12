@@ -44,8 +44,9 @@ recruiterprofile::~recruiterprofile()
     delete ui;
 }
 
-void recruiterprofile::setSession(int ID) {
+void recruiterprofile::setSession(int ID, int Type) {
     this->sessionID = ID;
+    this->sessionType = Type;
 }
 
 void recruiterprofile::loadProfile()
@@ -142,7 +143,7 @@ void recruiterprofile::on_pushButton_addVacancy_clicked()
     hide();
     vacancy_ = new vacancy(this);
     vacancy_->setRecruiterID(id);
-    vacancy_->setSession(this->sessionID);
+    vacancy_->setSession(this->sessionID, this->sessionType);
     vacancy_->show();
 }
 
@@ -155,7 +156,10 @@ void recruiterprofile::on_pushButton_delVacancy_clicked()
 
         qry.prepare("DELETE FROM vacancy WHERE vacancy_id = :id");
         qry.bindValue(":id", vacancy_model->index(rowidx , 0).data().toString());
-        qry.exec();
+
+        if (qry.exec()) {
+            loadVacancies();
+        }
     }
 }
 
@@ -163,7 +167,7 @@ void recruiterprofile::on_pushButton_search_clicked()
 {
     this->hide();
     searcher = new Search(this);
-    searcher->setSession(this->sessionID);
+    searcher->setSession(this->sessionID, this->sessionType);
     searcher->show();
 }
 
@@ -226,21 +230,15 @@ void recruiterprofile::on_tableView_vacancies_doubleClicked(const QModelIndex &i
 
         // get `id` from the selected row
         vacancy *cur = new vacancy(this);
-        cur->setSession(this->sessionID);
+        cur->setSession(this->sessionID, this->sessionType);
 
         cur->setID(id);
 
-        if (perspective != 1) { // standard view
-            cur->closeButton_1();
-            cur->setPerspective(0); // perspective argument will be max(0, perspective)
-            if (this->id != this->sessionID)
-                cur->closeButtons_2();
+        if (this->sessionType == 0) { // a recruiter is viewing
+            if (this->id != this->sessionID) // this is not the owner of the profile
+                cur->closeLocationButtons();
         }
-        else {
-            // seeker view
-            cur->setPerspective(1);
-            cur->closeButtons_2();
-        }
+
         cur->setModal(true);
         cur->exec();
     }
