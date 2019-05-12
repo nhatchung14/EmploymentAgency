@@ -20,8 +20,8 @@ void experience::on_pushButton_clicked()
     QString company = ui->lineEdit_company->text();
     QString job = ui->lineEdit_job->text();
     QString addr = ui->lineEdit_work_address->text();
-    QString start = ui->dateEdit_start->text();
-    QString end = ui->dateEdit_end->text();
+    QDate start = ui->dateEdit_start->date();
+    QDate end = ui->dateEdit_end->date();
     QString details = ui->textEdit_details->toPlainText();
 
     //setting up INSERT query

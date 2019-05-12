@@ -84,8 +84,6 @@ QString Search::prepareCommand() {
 
 void Search::on_pushButton_load_clicked()
 {
-    qDebug() << prepareCommand();
-
     QSqlQuery query;
     query.prepare(prepareCommand());
     query.exec();
@@ -95,8 +93,6 @@ void Search::on_pushButton_load_clicked()
 
     // finally setting the model for tableView
     ui->tableView->setModel(model);
-
-    // qDebug() << (model->rowCount());
 }
 
 void Search::on_tableView_doubleClicked(const QModelIndex &index)

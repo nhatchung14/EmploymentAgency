@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS dbtest;
+CREATE DATABASE IF NOT EXISTS employment_agency_final;
 
-USE dbtest;
+USE employment_agency_final;
 -- -----------------------------------------------------
 -- Table login_account
 -- -----------------------------------------------------

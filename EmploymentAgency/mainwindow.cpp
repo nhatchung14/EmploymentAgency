@@ -9,12 +9,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // connect the database
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Users/wokhu/Documents/DB Assignment/EmploymentAgency-master/EmploymentAgency-master/Database/EmploymentAgency");
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("127.0.0.1");
+    db.setUserName("root");
+    db.setPassword("Gigster1409");
+    db.setDatabaseName("employment_agency_final");
+
     if (db.open()) {}
     else {
         QMessageBox::information(this, "Login call", "Database failed");
     }
+
 }
 
 MainWindow::~MainWindow()

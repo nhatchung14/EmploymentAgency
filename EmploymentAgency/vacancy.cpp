@@ -12,8 +12,6 @@ vacancy::vacancy(QWidget *parent) :
     // data view model
     location_model = new QSqlQueryModel;
     ui->tableView_locations->setSelectionBehavior(QAbstractItemView::SelectRows); // select items as rows
-
-    //CounterInit();
 }
 
 vacancy::~vacancy()
@@ -90,7 +88,6 @@ void vacancy::closeLocationButtons() {
 
 void vacancy::on_pushButton_apply_clicked()
 {
-    // qDebug() << this->sessionID;
     QSqlQuery query;
     query.prepare("INSERT INTO job_application(seeker_id, vacancy_id) VALUES(:seeker_id, :vacancy_id)");
     query.bindValue(":seeker_id", this->sessionID);
@@ -102,8 +99,8 @@ void vacancy::on_pushButton_apply_clicked()
 void vacancy::on_pushButton_add_vacancy_clicked()
 {
     //getting the data
-    QString published = ui->dateEdit_published->text();
-    QString closed = ui->dateEdit_closed->text();
+    QDate published = ui->dateEdit_published->date();
+    QDate closed = ui->dateEdit_closed->date();
     QString position = ui->lineEdit_position->text();
     QString desc = ui->textEdit_desc->toPlainText();
     QString salary = ui->lineEdit_salary->text();
@@ -111,18 +108,6 @@ void vacancy::on_pushButton_add_vacancy_clicked()
     QString require = ui->textEdit_require->toPlainText();
     QString benefit = ui->textEdit_bene->toPlainText();
     QString other = ui->textEdit_other->toPlainText();
-
-    // Debug
-    //qDebug() << counter;
-    //qDebug() << idRecruiter;
-    //qDebug() << published;
-    //qDebug() << closed;
-    //qDebug() << desc;
-    //qDebug() << salary;
-    //qDebug() << nego;
-    //qDebug() << require;
-    //qDebug() << benefit;
-    //qDebug() << other;
 
     //setting up INSERT query
     QSqlQuery query;

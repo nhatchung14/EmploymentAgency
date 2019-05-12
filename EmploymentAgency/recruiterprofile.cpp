@@ -199,8 +199,8 @@ void recruiterprofile::on_pushButton_editMode_clicked()
         query.bindValue(":phone_number", ui->lineEdit_phone->text());
         query.bindValue(":id", this->id);
         query.exec();
-        if (query.exec()) {
-            qDebug() << "query 1 executed";
+        if (!query.exec()) {
+            qDebug() << "query 1 not executed";
         }
 
         // query two
@@ -211,8 +211,8 @@ void recruiterprofile::on_pushButton_editMode_clicked()
         query.bindValue(":company_description", ui->plainTextEdit_description->toPlainText());
         query.bindValue(":url", ui->lineEdit_url->text());
         query.bindValue(":id", this->id);
-        if (query.exec()) {
-            qDebug() << "query 2 executed";
+        if (!query.exec()) {
+            qDebug() << "query 2 not executed";
         }
 
         ui->pushButton_editMode->setText("Read");

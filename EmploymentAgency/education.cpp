@@ -31,7 +31,10 @@ void education::on_pushButton_clicked()
     query.bindValue(":degree_name", degree);
     query.bindValue(":major", major);
     query.bindValue(":school_name", school);
-    query.bindValue(":gpa", gpa);
+    if (gpa != "")
+        query.bindValue(":gpa", gpa.toFloat());
+    else
+        query.bindValue(":gpa", 0.0);
     query.bindValue(":other_details", details);
 
     if (query.exec()) {
